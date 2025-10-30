@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import json
-import base64
+import os
 
 app = Flask(__name__)
 
@@ -10,7 +9,11 @@ def index():
 
 @app.route('/api/health')
 def health_check():
-    return jsonify({"status": "QuSecure-Mail Server Running"})
+    return jsonify({
+        "status": "QuSecure-Mail Server Running", 
+        "version": "1.0",
+        "modules": ["Flask", "AI Entropy", "PQC Crypto"]
+    })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host='0.0.0.0')
